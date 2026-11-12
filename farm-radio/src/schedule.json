@@ -1,0 +1,576 @@
+{
+"afternoon": [
+{
+"s": 0,
+"d": 1.5,
+"c": "BRK",
+"t": "16:00 Afternoon Agri Briefing",
+"u": "Top stories since the morning",
+"p": [
+"AL",
+"PM"
+]
+},
+{
+"s": 1.5,
+"d": 2.0,
+"c": "PRC",
+"t": "Market Close Preview: Grain, Livestock, Dairy",
+"u": "Live data feed, auto-updating",
+"p": [
+"JvM"
+]
+},
+{
+"s": 3.5,
+"d": 2.0,
+"c": "WX",
+"t": "Evening Work Forecast: Field Access Windows",
+"u": "Hyper-local, by postcode area",
+"p": [
+"GT"
+]
+},
+{
+"s": 5.5,
+"d": 3.0,
+"c": "INT",
+"t": "Trendsetter: Young Farmer Building a Following",
+"u": "Guest interview + clips posted to feed",
+"p": [
+"GvN",
+"AL"
+]
+},
+{
+"s": 8.5,
+"d": 2.5,
+"c": "MUS",
+"t": "Drive-Time Track + Quickfire Quiz",
+"u": "Music & infotainment",
+"p": [
+"GvN"
+]
+},
+{
+"s": 11.0,
+"d": 2.0,
+"c": "UGC",
+"t": "\"Wie's bang vir skaapkop?\"",
+"u": "App uploads read out + posted to feed",
+"p": [
+"GvN"
+]
+},
+{
+"s": 13.0,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 1",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 16.0,
+"d": 1.5,
+"c": "BRK",
+"t": "BREAKING: Export Tariff Announcement Hits Beef Trade",
+"u": "Developing story - live thread opened",
+"p": [
+"PM",
+"JvM"
+],
+"th": "TARIFF",
+"r": "open"
+},
+{
+"s": 17.5,
+"d": 2.5,
+"c": "PRC",
+"t": "Live Reaction: Beef Prices Respond",
+"u": "Data feed + auction mart reporters",
+"p": [
+"JvM"
+]
+},
+{
+"s": 20.0,
+"d": 3.0,
+"c": "INT",
+"t": "Stakeholder Interview: RPO Responds",
+"u": "Live guest, questions from listeners",
+"p": [
+"PM"
+]
+},
+{
+"s": 23.0,
+"d": 2.0,
+"c": "LAI",
+"t": "Near You: How Local Auction Marts Are Affected",
+"u": "Localised by listener location data",
+"p": [
+"AL"
+]
+},
+{
+"s": 25.0,
+"d": 2.0,
+"c": "KNOW",
+"t": "Training Bite: Landbou konnektiwiteit krities",
+"u": "Practical how-to + checklist on demand",
+"p": [
+"CH"
+]
+},
+{
+"s": 27.0,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 2",
+"u": "5 spots + sponsor credit",
+"p": []
+},
+{
+"s": 30.0,
+"d": 1.5,
+"c": "BRK",
+"t": "TARIFF UPDATE 1: Government Statement- AGBIZ",
+"u": "Thread update - what was said",
+"p": [
+"PM"
+],
+"th": "TARIFF",
+"r": "upd"
+},
+{
+"s": 31.5,
+"d": 3.5,
+"c": "OPN",
+"t": "Phone-In: Ons staan saam!",
+"u": "Opinion, debate & advocacy",
+"p": [
+"PM",
+"AL"
+]
+},
+{
+"s": 35.0,
+"d": 1.5,
+"c": "SOC",
+"t": "Topic Pulse: #BeefTariff Trending",
+"u": "Social reaction read live on air",
+"p": [
+"GvN"
+]
+},
+{
+"s": 36.5,
+"d": 2.0,
+"c": "BX",
+"t": "TELKOM Agritech",
+"u": "Branded experiential - series on demand",
+"p": [
+"GvN",
+"CH"
+]
+},
+{
+"s": 38.5,
+"d": 2.0,
+"c": "POD",
+"t": "Podcast: 'Maak 'n Plan' New Episode",
+"u": "Clip on air, full episode on demand",
+"p": [
+"JvM"
+]
+},
+{
+"s": 40.5,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 3",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 43.5,
+"d": 2.5,
+"c": "ADV",
+"t": "Branded Experience: Case Tractors Demo Day",
+"u": "Sponsored experiential programming",
+"p": [
+"JvM"
+]
+},
+{
+"s": 46.0,
+"d": 2.0,
+"c": "IND",
+"t": "Industry Advance: Drone Spraying Trials Approved",
+"u": "What it means on the ground",
+"p": [
+"CH"
+]
+},
+{
+"s": 48.0,
+"d": 1.0,
+"c": "BRK",
+"t": "TARIFF UPDATE 2: Beef Market Closes Lower",
+"u": "Thread update - closing prices",
+"p": [
+"JvM",
+"PM"
+],
+"th": "TARIFF",
+"r": "upd"
+},
+{
+"s": 49.0,
+"d": 2.0,
+"c": "EDI",
+"t": "Editorial: Trade Uncertainty & the Long View- GRAIN SA",
+"u": "Agri industry editorial",
+"p": [
+"AL"
+]
+},
+{
+"s": 51.0,
+"d": 2.0,
+"c": "LDR",
+"t": "Listener-Voted Drive Track",
+"u": "Winner of the afternoon app vote",
+"p": [
+"GvN"
+]
+},
+{
+"s": 53.0,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 4",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 56.0,
+"d": 2.0,
+"c": "POL",
+"t": "Policy Watch: Farm Diversification Planning Rules- AGRI SA",
+"u": "Local council decision explained",
+"p": [
+"PM"
+]
+},
+{
+"s": 58.0,
+"d": 1.0,
+"c": "WX",
+"t": "Overnight Wind Alert",
+"u": "Climate & livestock advice",
+"p": [
+"GT"
+]
+},
+{
+"s": 59.0,
+"d": 1.0,
+"c": "BRK",
+"t": "Insight & Forecast: Tomorrow's Agri Agenda",
+"u": "What to watch overnight",
+"p": [
+"AL",
+"JvM"
+]
+}
+],
+"morning": [
+{
+"s": 0,
+"d": 2.0,
+"c": "BRK",
+"t": "07:00 Agri Headlines & Today's Outlook",
+"u": "Top stories, market mood, the day ahead",
+"p": [
+"AL",
+"JvM"
+]
+},
+{
+"s": 2.0,
+"d": 2.0,
+"c": "WX",
+"t": "Field Forecast: Spray Windows & Frost Risk",
+"u": "Hyper-local, by postcode area",
+"p": [
+"GT"
+]
+},
+{
+"s": 4.0,
+"d": 1.5,
+"c": "PRC",
+"t": "Opening Prices: Wheat, Milk, Beef, Lamb",
+"u": "Live data feed, auto-updating",
+"p": [
+"JvM"
+]
+},
+{
+"s": 5.5,
+"d": 3.0,
+"c": "INT",
+"t": "LIVE: Dairy Farmer, Mid-Milking",
+"u": "Guest on the line from the parlour",
+"p": [
+"AL",
+"CH"
+]
+},
+{
+"s": 8.5,
+"d": 3.0,
+"c": "LDR",
+"t": "Listener-Voted Track",
+"u": "Top of this morning's app vote",
+"p": [
+"GvN"
+]
+},
+{
+"s": 11.5,
+"d": 1.0,
+"c": "UGC",
+"t": "Farm Life- \"My dom buurman\"",
+"u": "Listener calving updates via the app",
+"p": [
+"GvN"
+]
+},
+{
+"s": 12.5,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 1",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 15.5,
+"d": 2.0,
+"c": "IND",
+"t": "Autonomous Drilling Trial: First Results",
+"u": "Field report from the trial site",
+"p": [
+"CH"
+]
+},
+{
+"s": 17.5,
+"d": 1.5,
+"c": "BRK",
+"t": "BREAKING: Flood Warning for Low-Lying Farmland",
+"u": "Developing story - live thread opened",
+"p": [
+"GT",
+"AL"
+],
+"th": "FLOOD",
+"r": "open"
+},
+{
+"s": 19.0,
+"d": 2.0,
+"c": "LAI",
+"t": "Your Area Now: Road Closures & Market Days",
+"u": "Localised by listener location data",
+"p": [
+"AL"
+]
+},
+{
+"s": 21.0,
+"d": 2.5,
+"c": "KNOW",
+"t": "60-Second Masterclass: Soil Sampling",
+"u": "Agronomist explainer + downloadable guide",
+"p": [
+"CH"
+]
+},
+{
+"s": 23.5,
+"d": 2.0,
+"c": "BX",
+"t": "FNB Insurance",
+"u": "Live segment + full episode on demand",
+"p": [
+"GvN"
+]
+},
+{
+"s": 25.5,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 2",
+"u": "5 spots + sponsor credit",
+"p": []
+},
+{
+"s": 28.5,
+"d": 1.5,
+"c": "BRK",
+"t": "FLOOD UPDATE 1: Moving Livestock to Higher Ground",
+"u": "Thread update - advice from vets",
+"p": [
+"GT"
+],
+"th": "FLOOD",
+"r": "upd"
+},
+{
+"s": 30.0,
+"d": 3.0,
+"c": "POL",
+"t": "New Subsidy Rules: What Changes for You",
+"u": "Local & national policy explained",
+"p": [
+"PM"
+]
+},
+{
+"s": 33.0,
+"d": 3.5,
+"c": "OPN",
+"t": "THE DEBATE: Rewilding vs Food Security",
+"u": "Studio panel + listener call-ins",
+"p": [
+"PM",
+"AL"
+]
+},
+{
+"s": 36.5,
+"d": 1.5,
+"c": "SOC",
+"t": "Topic Pulse: Social Reaction to the Debate",
+"u": "Trending posts + live poll result",
+"p": [
+"GvN"
+]
+},
+{
+"s": 38.0,
+"d": 2.0,
+"c": "ADV",
+"t": "Branded Experience: Inside a Feed Mill",
+"u": "Sponsored experiential audio tour",
+"p": [
+"JvM"
+]
+},
+{
+"s": 40.0,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 3",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 43.0,
+"d": 1.5,
+"c": "PRC",
+"t": "Price Move: Grain Futures Jump",
+"u": "Auto-triggered by the market data feed",
+"p": [
+"JvM"
+]
+},
+{
+"s": 44.5,
+"d": 2.5,
+"c": "POD",
+"t": "Podcast Drop: 'Next Gen Farmers'",
+"u": "Trailer on air, full episode on demand",
+"p": [
+"GvN"
+]
+},
+{
+"s": 47.0,
+"d": 2.0,
+"c": "EDI",
+"t": "Editorial: Who Really Sets the Milk Price?- AGRI EXPO",
+"u": "Agri industry editorial",
+"p": [
+"AL"
+]
+},
+{
+"s": 49.0,
+"d": 1.0,
+"c": "BRK",
+"t": "FLOOD UPDATE 2: Rescue & Road Access",
+"u": "Thread update - live from the field",
+"p": [
+"GT",
+"CH"
+],
+"th": "FLOOD",
+"r": "upd"
+},
+{
+"s": 50.0,
+"d": 2.0,
+"c": "MUS",
+"t": "Track + Farm Fact",
+"u": "Music & infotainment",
+"p": [
+"GvN"
+]
+},
+{
+"s": 52.0,
+"d": 3.0,
+"c": "STOP",
+"t": "Stop Set 4",
+"u": "6 spots + sponsor credit",
+"p": []
+},
+{
+"s": 55.0,
+"d": 1.5,
+"c": "WX",
+"t": "Forecast Refresh: Rain Arriving Earlier",
+"u": "Model update pushes timings forward",
+"p": [
+"GT"
+]
+},
+{
+"s": 56.5,
+"d": 2.0,
+"c": "INT",
+"t": "Brand Interview: John Deere",
+"u": "Brand + trendsetter conversation",
+"p": [
+"JvM",
+"CH"
+]
+},
+{
+"s": 58.5,
+"d": 1.5,
+"c": "BRK",
+"t": "Insight & Forecast: The Hour Ahead",
+"u": "What's coming, what to watch",
+"p": [
+"AL",
+"JvM"
+]
+}
+]
+}
