@@ -3,7 +3,7 @@
 A rebuild of the FARM RADIO demo site in a "broadcast almanac" style: paper and ink, hairline-ruled boxes and one on-air orange.
 
 ## What to upload
-`release/index.html` is the whole site in **one self-contained file** (about 2.4 MB). It includes the images, fonts, audio and code. Upload it to WordPress the same way as the old file (Media › Add New, then open its URL).
+`release/index.html` is the whole site in **one self-contained file** (about 2.9 MB). It includes the images, fonts, audio and code. Upload it to WordPress the same way as the old file (Media › Add New, then open its URL).
 
 ## Edit the content
 All the content lives in **`src/data.js`**: presenters, schedule tweaks, prices, weather, sport, chat, songs, brand series and sponsors. The hour's running order is in `src/schedule.json`. Images are in `src/assets/`.
@@ -25,6 +25,7 @@ npm run build    # writes dist/index.html; copy it to release/index.html
   - `SplitFlapText`: the market board
   - `Topography`: the contour-map background in the studio
   - `LogoLoop`: the partner wordmarks
+- **three.js** (same version React Bits uses): the 3D FARM RADIO logo in the studio, which you can drag to spin.
 - Vite and React, bundled into a single file with `vite-plugin-singlefile`.
 
 ## Page map

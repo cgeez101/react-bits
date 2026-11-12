@@ -5,6 +5,7 @@ import Topography from '@bits/Backgrounds/Topography/Topography.jsx';
 import { CHANNELS, PRESENTERS, SEGMENTS, PRICES, TRENDS, isAd } from '../data';
 import { curIndex, hhmm, lastShowIndex, nextShows, pad, priceAt, fmtPrice, useAudio, useMinute, useWholeMinute } from '../engine';
 import { PauseIcon, PlayIcon, VU } from '../ui';
+import Logo3D from './Logo3D';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -27,7 +28,18 @@ function TunedTitle({ text }) {
     });
     return () => tw.kill();
   }, [text]);
-  return <h1 className={`display${text.length > 44 ? ' long' : ''}`} ref={ref} aria-live="polite" />;
+  /* size the headline so its longest word always fits the column */
+  const longest = Math.max(...text.split(/\s+/).map(w => w.length), 6);
+  const fit = (100 / (longest * 0.9)).toFixed(2);
+  const cap = text.length > 44 ? 9 : 11.5;
+  return (
+    <h1
+      className="display"
+      ref={ref}
+      aria-live="polite"
+      style={{ fontSize: `clamp(26px, min(${cap}cqi, ${fit}cqi), 92px)` }}
+    />
+  );
 }
 
 const mmss = min => {
@@ -152,8 +164,13 @@ export default function Studio() {
           <span className="sr" id="onair-title">
             On air now: {seg.t}
           </span>
-          <TunedTitle text={seg.t} />
-          <p className="sub">{seg.u}</p>
+          <div className="stage">
+            <div className="stage-text">
+              <TunedTitle text={seg.t} />
+              <p className="sub">{seg.u}</p>
+            </div>
+            <Logo3D />
+          </div>
           <div className="deck">
             <button className="play" onClick={() => toggle(seg.t, 'live')} aria-label={liveOn ? 'Pause live radio' : 'Listen live'}>
               {liveOn ? <PauseIcon /> : <PlayIcon />}
