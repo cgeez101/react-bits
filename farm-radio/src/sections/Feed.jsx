@@ -145,7 +145,7 @@ export default function Feed() {
     <section className="blk" id="feed" aria-labelledby="feed-h">
       <SectionHead
         id="feed-h"
-        idx="02"
+        idx="95.7 FM"
         label="The feed · on demand"
         title="The feed"
         lede="What's live, what's coming up, and everything we've aired today, ready when you are."

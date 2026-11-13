@@ -1,21 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PRESENTING, SEGMENTS } from '../data';
 import { clockAt, hhmm, pad, useAudio, useMinute, lastShowIndex } from '../engine';
-import { Logo, goTo } from '../ui';
-
-gsap.registerPlugin(ScrollTrigger);
-
-export const STATIONS = [
-  ['live', 'On air', '88.2'],
-  ['desk', 'Desk', '91.6'],
-  ['feed', 'Feed', '94.8'],
-  ['voice', 'Your voice', '97.4'],
-  ['vote', 'Vote', '99.9'],
-  ['partners', 'Partners', '102.5'],
-  ['team', 'Team', '105.3']
-];
+import { go } from '../ui';
+import { GROUPS, PAGES, pageById } from '../pages';
+import Logo3D from './Logo3D';
 
 function Clock() {
   const m = useMinute();
@@ -32,83 +21,82 @@ function Clock() {
   );
 }
 
-function Tuner() {
-  const [active, setActive] = useState('live');
-  const wrap = useRef(null);
-  const needle = useRef(null);
-
+/* the station menu: every page, grouped, behind the button at the top right */
+function Menu({ open, page, onClose }) {
+  const panel = useRef(null);
   useEffect(() => {
-    const triggers = STATIONS.map(([id]) =>
-      ScrollTrigger.create({
-        trigger: `#${id}`,
-        start: 'top 45%',
-        end: 'bottom 45%',
-        onToggle: self => self.isActive && setActive(id)
-      })
-    );
-    return () => triggers.forEach(t => t.kill());
-  }, []);
-
-  useLayoutEffect(() => {
-    const move = (instant = false) => {
-      const a = wrap.current?.querySelector(`a[data-id="${active}"]`);
-      if (!a) return;
-      const x = a.offsetLeft + a.offsetWidth / 2;
-      gsap.to(needle.current, { left: x, duration: instant ? 0 : 0.9, ease: 'elastic.out(1, 0.6)' });
+    if (!open) return;
+    window.__lenis?.stop();
+    const k = e => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', k);
+    panel.current?.querySelector('a.on, a')?.focus({ preventScroll: true });
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+      gsap.fromTo(panel.current.querySelectorAll('.menu-item'), { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, stagger: 0.025, ease: 'power3.out' });
+    return () => {
+      window.removeEventListener('keydown', k);
+      window.__lenis?.start();
     };
-    move();
-    const r = () => move(true);
-    window.addEventListener('resize', r);
-    return () => window.removeEventListener('resize', r);
-  }, [active]);
-
+  }, [open, onClose]);
   return (
-    <nav className="tuner" aria-label="Sections" ref={wrap}>
-      <div className="tuner-scale" aria-hidden="true" />
-      <div className="tuner-stations">
-        {STATIONS.map(([id, label, f]) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            data-id={id}
-            className={active === id ? 'on' : ''}
-            aria-current={active === id ? 'true' : undefined}
-            onClick={e => {
-              e.preventDefault();
-              goTo(id);
-            }}
-          >
-            <small>{f}</small>
-            {label}
-          </a>
-        ))}
-      </div>
-      <div className="tuner-needle" ref={needle} aria-hidden="true" />
-    </nav>
+    <>
+      <div className={`scrim${open ? ' on' : ''}`} onClick={onClose} />
+      <nav className={`menu${open ? ' open' : ''}`} ref={panel} aria-label="Pages" aria-hidden={!open} id="site-menu">
+        <div className="menu-h">
+          <span className="mono">Tune in · {PAGES.length} stations</span>
+          <button onClick={onClose} aria-label="Close menu" tabIndex={open ? 0 : -1}>
+            ×
+          </button>
+        </div>
+        <div className="menu-body" data-lenis-prevent>
+          {GROUPS.map(g => (
+            <div className="menu-group" key={g}>
+              <span className="menu-g mono">{g}</span>
+              {PAGES.filter(p => p.group === g).map(p => (
+                <a
+                  key={p.id}
+                  href={`#${p.id}`}
+                  className={`menu-item${page === p.id ? ' on' : ''}`}
+                  aria-current={page === p.id ? 'page' : undefined}
+                  tabIndex={open ? 0 : -1}
+                  onClick={e => {
+                    e.preventDefault();
+                    onClose();
+                    go(p.id);
+                  }}
+                >
+                  <span className="f mono">{p.freq}</span>
+                  <span className="l">{p.label}</span>
+                  <span className="b muted">{p.blurb}</span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </nav>
+    </>
   );
 }
 
-function Breaking() {
+export function Breaking() {
   const m = useMinute();
   const aired = SEGMENTS.filter(s => s.th && s.s <= m);
   if (!aired.length) return null;
   const open = aired.find(s => s.r === 'open') || aired[0];
   const latest = aired[aired.length - 1];
-  const head = open.t.replace(/^BREAKING:\s*/i, '');
   return (
     <div className="breaking" role="region" aria-label="Breaking news">
       <span className="tag">Breaking</span>
-      <strong>{head}</strong>
+      <strong>{open.t.replace(/^BREAKING:\s*/i, '')}</strong>
       <span className="meta">
         Developing story · updated {hhmm(latest.s)}
         {latest !== open && ` · ${latest.t.replace(/^.*?:\s*/, '')}`}
       </span>
       <a
-        href="#feed"
+        href="#wire"
         className="mono"
         onClick={e => {
           e.preventDefault();
-          goTo('feed');
+          go('wire');
         }}
       >
         Follow the story →
@@ -117,17 +105,13 @@ function Breaking() {
   );
 }
 
-export default function Header() {
-  const [menu, setMenu] = useState(false);
+export default function Header({ page, menuOpen, setMenuOpen }) {
   const { toggle, playing, kind } = useAudio();
   const m = useMinute();
   const seg = SEGMENTS[lastShowIndex(m)];
   const liveOn = playing && kind === 'live';
-
-  useEffect(() => {
-    if (menu) window.__lenis?.stop();
-    else window.__lenis?.start();
-  }, [menu]);
+  const here = pageById(page);
+  const close = useCallback(() => setMenuOpen(false), [setMenuOpen]);
 
   return (
     <>
@@ -142,7 +126,7 @@ export default function Header() {
           className="mono"
           onClick={e => {
             e.preventDefault();
-            goTo('partners');
+            go('partners');
           }}
         >
           Find out more →
@@ -153,21 +137,24 @@ export default function Header() {
           <a
             className="logo"
             href="#live"
-            aria-label="FARM RADIO home"
+            aria-label="FARM RADIO: go to On air"
             onClick={e => {
               e.preventDefault();
-              goTo('live');
+              go('live');
             }}
           >
-            <Logo />
+            <Logo3D variant="mini" />
           </a>
-          <Tuner />
-          <span className="spacer head-now mono">
-            <span className="dot dot--live" />
-            <span>
-              On air · <b>{seg.t}</b>
+          <div className="head-where">
+            <span className="mono crumb">
+              <b>{here.freq} FM</b> · {here.group === 'Studio' ? 'On air' : `${here.group} · ${here.label}`}
             </span>
-          </span>
+            {page !== 'live' && (
+              <button className="mono now" onClick={() => go('live')}>
+                <span className="dot dot--live" /> On air: <b>{seg.t}</b>
+              </button>
+            )}
+          </div>
           <Clock />
           <div className="head-listen">
             <button className="btn btn--signal" onClick={() => toggle(seg.t, 'live')} aria-pressed={liveOn}>
@@ -175,27 +162,23 @@ export default function Header() {
               {liveOn ? 'Listening' : 'Listen live'}
             </button>
           </div>
-          <button className="menu-btn" aria-label="Menu" aria-expanded={menu} onClick={() => setMenu(v => !v)}>
-            <span />
+          <button
+            className="menu-btn"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            onClick={() => setMenuOpen(true)}
+          >
+            <span className="mono">Menu</span>
+            <span className="bars" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
           </button>
         </div>
       </header>
-      <nav className={`mnav${menu ? ' open' : ''}`} aria-label="Sections">
-        {STATIONS.map(([id, label, f]) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            onClick={e => {
-              e.preventDefault();
-              setMenu(false);
-              setTimeout(() => goTo(id), 30);
-            }}
-          >
-            {label}
-            <small>{f} FM</small>
-          </a>
-        ))}
-      </nav>
+      <Menu open={menuOpen} page={page} onClose={close} />
       <Breaking />
     </>
   );

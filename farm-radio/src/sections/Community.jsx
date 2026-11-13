@@ -52,7 +52,7 @@ export function Voice() {
     <section className="blk" id="voice" aria-labelledby="voice-h">
       <SectionHead
         id="voice-h"
-        idx="03"
+        idx="99.9 FM"
         label="Your voice"
         title="Your voice"
         lede="Get your farming life on the air. Voice notes, clips and photos from the farm, read out and shared on the feed."
@@ -97,7 +97,7 @@ export function Vote() {
     <section className="blk" id="vote" aria-labelledby="vote-h">
       <SectionHead
         id="vote-h"
-        idx="04"
+        idx="97.4 FM"
         label="Farmer-driven radio"
         title="Pick the next song"
         lede="Tap a song to vote. The most-voted track plays next on FARM RADIO."
@@ -149,7 +149,7 @@ export function Brands() {
     <section className="blk" id="brands" aria-labelledby="brands-h">
       <SectionHead
         id="brands-h"
-        idx="05"
+        idx="102.5 FM"
         label="Brand series"
         title="Brand series"
         lede="Shows made with the brands that farm with you: live features, field visits and masterclasses from the names behind South African farming. On air, in the feed and on demand."

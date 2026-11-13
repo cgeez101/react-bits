@@ -32,7 +32,7 @@ export function Partners() {
     <section className="blk" id="partners" aria-labelledby="partners-h">
       <SectionHead
         id="partners-h"
-        idx="06"
+        idx="105.3 FM"
         label="Partners in agriculture"
         title="Our partners"
         lede="FARM RADIO programming is resourced by our partners in agriculture."
@@ -113,7 +113,7 @@ export function Team() {
     <section className="blk" id="team" aria-labelledby="team-h">
       <SectionHead
         id="team-h"
-        idx="07"
+        idx="101.3 FM"
         label="On-air team"
         title="Our presenters"
         lede="FARM RADIO is live, and our team jumps on air whenever there's something you need to hear."

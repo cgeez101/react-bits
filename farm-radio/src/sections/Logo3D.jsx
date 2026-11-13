@@ -8,7 +8,7 @@ import { Logo } from '../ui';
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function buildLogo() {
+function buildLogo(mini) {
   const data = new SVGLoader().parse(logoSvg);
   const shapes = data.paths.flatMap(p => SVGLoader.createShapes(p));
   const geo = new THREE.ExtrudeGeometry(shapes, {
@@ -21,7 +21,10 @@ function buildLogo() {
   });
   geo.center();
   geo.computeVertexNormals();
-  const face = new THREE.MeshStandardMaterial({ color: '#fbf3e0', emissive: '#4a3418', emissiveIntensity: 0.35, roughness: 0.38, metalness: 0.05 });
+  // header badge sits on paper, so it gets an ink face; the big one sits in the dark studio, so cream
+  const face = mini
+    ? new THREE.MeshStandardMaterial({ color: '#1b1d17', roughness: 0.5, metalness: 0.1 })
+    : new THREE.MeshStandardMaterial({ color: '#fbf3e0', emissive: '#4a3418', emissiveIntensity: 0.35, roughness: 0.38, metalness: 0.05 });
   const side = new THREE.MeshStandardMaterial({ color: '#ff5b1f', roughness: 0.32, metalness: 0.25 });
   const mesh = new THREE.Mesh(geo, [face, side]);
   const s = 1 / 3600; // viewBox width → 1 unit
@@ -29,7 +32,8 @@ function buildLogo() {
   return mesh;
 }
 
-export default function Logo3D() {
+export default function Logo3D({ variant = 'hero' }) {
+  const mini = variant === 'mini';
   const wrap = useRef(null);
   const [failed, setFailed] = useState(false);
 
@@ -64,14 +68,15 @@ export default function Logo3D() {
     scene.add(fill);
 
     const pivot = new THREE.Group();
-    const logo = buildLogo();
+    const logo = buildLogo(mini);
     pivot.add(logo);
     scene.add(pivot);
 
     /* --- motion state --- */
     const still = reducedMotion();
-    const AUTO = still ? 0 : 0.0065; // idle spin, radians per frame
-    let rotY = -0.5;
+    // a slow, steady turn: about 20 s per spin for the big logo, 14 s for the header badge
+    const AUTO = still ? 0 : mini ? 0.0075 : 0.0052; // radians per frame
+    let rotY = mini ? 0 : -0.5;
     let velY = AUTO;
     let tiltX = 0;
     let tiltTarget = 0;
@@ -106,11 +111,13 @@ export default function Logo3D() {
       el.classList.remove('grabbing');
     };
     const onLeave = () => (tiltTarget = 0);
-    canvas.addEventListener('pointerdown', onDown);
-    canvas.addEventListener('pointermove', onMove);
-    canvas.addEventListener('pointerup', onUp);
-    canvas.addEventListener('pointercancel', onUp);
-    canvas.addEventListener('pointerleave', onLeave);
+    if (!mini) {
+      canvas.addEventListener('pointerdown', onDown);
+      canvas.addEventListener('pointermove', onMove);
+      canvas.addEventListener('pointerup', onUp);
+      canvas.addEventListener('pointercancel', onUp);
+      canvas.addEventListener('pointerleave', onLeave);
+    }
 
     /* --- sizing --- */
     const resize = () => {
@@ -147,7 +154,7 @@ export default function Logo3D() {
       const e = 1 - Math.pow(1 - intro, 3);
       pivot.rotation.set(tiltX + (1 - e) * 0.6, rotY - (1 - e) * 2.2, 0);
       pivot.scale.setScalar(0.6 + 0.4 * e);
-      pivot.position.y = Math.sin(performance.now() / 1400) * (still ? 0 : 0.05);
+      pivot.position.y = Math.sin(performance.now() / 1400) * (still || mini ? 0 : 0.05);
       renderer.render(scene, camera);
     };
     tick();
@@ -168,6 +175,12 @@ export default function Logo3D() {
     };
   }, []);
 
+  if (mini)
+    return (
+      <div className="logo3d logo3d--mini" ref={wrap} aria-hidden="true">
+        {failed && <Logo className="logo3d-flat" />}
+      </div>
+    );
   return (
     <div className="logo3d" ref={wrap} role="img" aria-label="FARM RADIO logo in 3D. Drag to spin it.">
       {failed && <Logo className="logo3d-flat" />}

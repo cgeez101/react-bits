@@ -235,3 +235,26 @@ export const PRESENTING = { brand: 'TOYOTA', line: 'The new Hilux Travo Overland
 
 export const ALBUM_IMG = img('album-bg');
 export const AUDIO_SRC = new URL('./assets/live-audio.mp3', import.meta.url).href;
+
+/* ---------- weather outlook: [day, summary, high °C, low °C, rain %, wind km/h] ---------- */
+export const OUTLOOK = [
+  ['Fri', 'Sunny', 27, 9, 5, 12],
+  ['Sat', 'Hot, light breeze', 31, 13, 10, 14],
+  ['Sun', 'Afternoon storms', 26, 15, 60, 22],
+  ['Mon', 'Cloud clearing', 24, 12, 25, 18],
+  ['Tue', 'Sunny', 28, 11, 5, 10]
+];
+/* field planner: [task, verdict, detail, good?] */
+export const PLANNER = [
+  ['Spraying', 'Go tomorrow', '05:00–09:00, before the wind picks up', true],
+  ['Planting', 'Hold', 'Wait for Sunday’s storms to soak in', false],
+  ['Hay cutting', 'Go', 'Dry until Saturday evening', true],
+  ['Frost risk', 'Low', 'Overnight lows stay above 6°C', true]
+];
+
+/* ---------- sport fixtures: [sport, when, match, where] ---------- */
+export const FIXTURES = [
+  ['Rugby', 'Fri 14 Nov · 22:10', 'France v Springboks', 'Stade de France, Paris'],
+  ['Cricket', 'From Sat 15 Nov', 'Proteas v Bangladesh, 1st Test', 'Wanderers, Johannesburg'],
+  ['Football', 'Tue 18 Nov', 'Bafana Bafana friendly', 'FNB Stadium']
+];

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { CHAT, SEGMENTS, STATION } from '../data';
 import { lastShowIndex, useAudio, useMinute } from '../engine';
-import { Logo, PauseIcon, PlayIcon, VU, goTo } from '../ui';
-import { STATIONS } from './Header';
+import { Logo, PauseIcon, PlayIcon, VU, go } from '../ui';
+import { PAGES } from '../pages';
 
 /* ---------------- sticky player ---------------- */
 export function PlayerBar() {
@@ -120,7 +120,17 @@ export function Room() {
 }
 
 /* ---------------- footer ---------------- */
-export function Footer() {
+export function Footer({ compact = false }) {
+  if (compact)
+    return (
+      <footer className="foot foot--compact">
+        <div className="foot-row">
+          <Logo className="foot-mini" />
+          <span className="mono">Live on our app · online · dash · socials</span>
+          <span className="mono muted-dark">© 2026 FARM RADIO · Demo website: brand names, prices, guests and stories are for demonstration only.</span>
+        </div>
+      </footer>
+    );
   return (
     <footer className="foot">
       <div className="foot-top">
@@ -149,16 +159,16 @@ export function Footer() {
       <div className="foot-base mono">
         <span>© 2026 FARM RADIO · Demo website: brand names, prices, guests and stories are for demonstration only.</span>
         <nav aria-label="Footer">
-          {STATIONS.slice(1).map(([id, label]) => (
+          {PAGES.map(p => (
             <a
-              key={id}
-              href={`#${id}`}
+              key={p.id}
+              href={`#${p.id}`}
               onClick={e => {
                 e.preventDefault();
-                goTo(id);
+                go(p.id);
               }}
             >
-              {label}
+              {p.label}
             </a>
           ))}
         </nav>

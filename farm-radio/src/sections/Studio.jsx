@@ -30,7 +30,7 @@ function TunedTitle({ text }) {
   }, [text]);
   /* size the headline so its longest word always fits the column */
   const longest = Math.max(...text.split(/\s+/).map(w => w.length), 6);
-  const fit = (100 / (longest * 0.9)).toFixed(2);
+  const fit = (100 / (longest * 1.02)).toFixed(2);
   const cap = text.length > 44 ? 9 : 11.5;
   return (
     <h1

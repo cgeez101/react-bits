@@ -28,9 +28,22 @@ npm run build    # writes dist/index.html; copy it to release/index.html
 - **three.js** (same version React Bits uses): the 3D FARM RADIO logo in the studio, which you can drag to spin.
 - Vite and React, bundled into a single file with `vite-plugin-singlefile`.
 
-## Page map
-Sponsor strip, then a header with the tuner-dial nav, live clock and Listen live, then the breaking band. After that:
+## Pages
+Each section is its own page. Open them from **Menu** at the top right, from the station index on the On air page, or with the Previous / Next buttons at the bottom of every page. Each page has its own link, for example `index.html#markets`.
 
-**Studio** (on air, up next, the hour strip) → price ticker → **01 Desk** (market board, weather, agri wire, sport, topic pulse) → **02 Feed** (filters, featured video, live/up next/on demand) → **03 Your voice** → **04 Song vote** → **05 Brand series** → **06 Partners** (wordmarks, partner carousel, media-kit pitch) → **07 Presenters** → footer.
+| Freq | Page | Link |
+|---|---|---|
+| 88.2 | On air (studio, 3D logo, this hour, station index) | `#live` |
+| 90.4 | Market board | `#markets` |
+| 91.6 | Weather | `#weather` |
+| 92.8 | Agri wire | `#wire` |
+| 93.5 | Sport | `#sport` |
+| 94.1 | Topic pulse | `#pulse` |
+| 95.7 | The feed | `#feed` |
+| 97.4 | Song vote | `#vote` |
+| 99.9 | Your voice | `#voice` |
+| 101.3 | Presenters | `#team` |
+| 102.5 | Brand series | `#brands` |
+| 105.3 | Partners | `#partners` |
 
-The sticky player bar and the Live room chat drawer float over every section.
+The page list lives in `src/pages.js`. The header, the sticky player and the Live room chat stay in place on every page.

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import SplitFlapText from '@bits/TextAnimations/SplitFlapText/SplitFlapText.jsx';
 import { PRICES, SEGMENTS, SPORT, TRENDS, weatherAt } from '../data';
 import { fmtPrice, hhmm, priceAt, useMinute, useWholeMinute } from '../engine';
-import { SectionHead } from '../ui';
 
 function useSeen(ref) {
   const [seen, setSeen] = useState(false);
@@ -18,7 +17,7 @@ function useSeen(ref) {
 const SHORT = n => n.replace(' (SAFEX)', '').replace(' (A2)', '');
 const SUBN = n => (n.includes('SAFEX') ? 'SAFEX' : n.includes('A2') ? 'A2 grade' : 'Farm gate');
 
-function Board() {
+export function Board({ title = 'Market board' }) {
   const wm = useWholeMinute();
   const ref = useRef(null);
   const seen = useSeen(ref);
@@ -26,7 +25,7 @@ function Board() {
   return (
     <div className="board" ref={ref}>
       <div className="cell-h">
-        <h3>Market board</h3>
+        <h3>{title}</h3>
         <span className="tag tag--live">
           <span className="dot dot--live" style={{ background: 'var(--ink)' }} /> Live
         </span>
@@ -81,12 +80,12 @@ function Board() {
   );
 }
 
-function Weather() {
+export function Weather({ title = 'Weather' }) {
   const w = weatherAt(useWholeMinute());
   return (
     <div className="cell">
       <div className="cell-h">
-        <h3>Weather</h3>
+        <h3>{title}</h3>
         <span className="mono muted">Your area</span>
       </div>
       <div className="wx-big">
@@ -139,7 +138,7 @@ function Expandable({ items, n = 4, more, render }) {
   );
 }
 
-function Wire() {
+export function Wire({ all = false, title = 'Agri wire' }) {
   const m = useWholeMinute();
   const thread = SEGMENTS.filter(s => s.th && s.s <= m)
     .reverse()
@@ -148,11 +147,12 @@ function Wire() {
   return (
     <div className="cell">
       <div className="cell-h">
-        <h3>Agri wire</h3>
+        <h3>{title}</h3>
         <span className="mono muted">{thread.length ? 'Developing' : 'Today'}</span>
       </div>
       <Expandable
         items={items}
+        n={all ? 99 : 4}
         more="More stories"
         render={(x, i) => (
           <li key={i}>
@@ -165,15 +165,16 @@ function Wire() {
   );
 }
 
-function Sport() {
+export function Sport({ all = false, title = 'Sport' }) {
   return (
     <div className="cell">
       <div className="cell-h">
-        <h3>Sport</h3>
+        <h3>{title}</h3>
         <span className="mono muted">Boks · Proteas · Bafana</span>
       </div>
       <Expandable
         items={SPORT}
+        n={all ? 99 : 4}
         more="More sport"
         render={(x, i) => (
           <li key={i}>
@@ -188,7 +189,7 @@ function Sport() {
   );
 }
 
-function Pulse() {
+export function Pulse({ title = 'Topic pulse' }) {
   const m = useMinute();
   const scored = TRENDS.map((t, k) => {
     const v = t[2] ? (m < 16 ? 6 : 40 + 60 * Math.min(1, (m - 16) / 4)) : 70 - k * 9 + 6 * Math.sin(m / 4 + k);
@@ -197,7 +198,7 @@ function Pulse() {
   return (
     <div className="cell">
       <div className="cell-h">
-        <h3>Topic pulse</h3>
+        <h3>{title}</h3>
         <span className="mono muted">Mentions / hr</span>
       </div>
       {scored.map(([tag, v, hot]) => {
@@ -216,34 +217,5 @@ function Pulse() {
         What farmers are talking about online right now
       </p>
     </div>
-  );
-}
-
-export default function Desk() {
-  return (
-    <section className="blk" id="desk" aria-labelledby="desk-h">
-      <SectionHead
-        id="desk-h"
-        idx="01"
-        label="Farm desk"
-        title="The desk"
-        lede="Prices, weather, the wire and the scores. What you need to know right now, updated live through the day."
-        aside={
-          <>
-            <span className="tag tag--ink">Live data</span>
-            <span className="mono muted">Demo feed</span>
-          </>
-        }
-      />
-      <div className="grid desk-top">
-        <Board />
-        <Weather />
-      </div>
-      <div className="grid desk-bottom">
-        <Wire />
-        <Sport />
-        <Pulse />
-      </div>
-    </section>
   );
 }

@@ -142,11 +142,8 @@ export function ToastProvider({ children }) {
 }
 export const useToast = () => useContext(ToastCtx);
 
-/* ---------- smooth scroll to an id ---------- */
-export const goTo = id => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const off = -(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--head-h')) || 64);
-  if (window.__lenis) window.__lenis.scrollTo(el, { offset: off, duration: 1.2 });
-  else el.scrollIntoView({ behavior: 'smooth' });
+/* ---------- go to a page (each section is its own page, linked by #id) ---------- */
+export const go = id => {
+  if (location.hash.replace('#', '') === id) window.dispatchEvent(new HashChangeEvent('hashchange'));
+  else location.hash = id;
 };
