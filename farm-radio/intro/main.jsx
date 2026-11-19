@@ -57,13 +57,15 @@ function LogoStage() {
     pivot.add(buildLogo(false));
     scene.add(pivot);
     let blank = false;
+    el.style.visibility = 'hidden';
     const draw = () => {
       // skip WebGL work entirely while the logo is off screen
       if (pose.s < 0.001) {
-        if (!blank) renderer.clear();
+        if (!blank) el.style.visibility = 'hidden';
         blank = true;
         return;
       }
+      if (blank) el.style.visibility = 'visible';
       blank = false;
       pivot.scale.setScalar(Math.max(0.0001, pose.s));
       pivot.rotation.set(pose.rx, pose.ry, 0);
@@ -83,6 +85,7 @@ function LogoStage() {
 /* ---------- VU meter, a pure function of timeline time so every frame is repeatable ---------- */
 const BARS = 64;
 function setVU(el, t, level) {
+  el.style.opacity = Math.min(1, level * 3).toFixed(3); // fully gone when the meter is at rest
   [...el.children].forEach((b, i) => {
     const v = level * (0.25 + 0.7 * Math.abs(Math.sin(t * 7.3 + i * 0.61) * Math.cos(t * 3.1 + i * 0.23)));
     b.style.transform = `scaleY(${Math.max(0.04, v).toFixed(3)})`;
