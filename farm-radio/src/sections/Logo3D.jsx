@@ -8,7 +8,7 @@ import { Logo } from '../ui';
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function buildLogo(mini) {
+export function buildLogo(mini) {
   const data = new SVGLoader().parse(logoSvg);
   const shapes = data.paths.flatMap(p => SVGLoader.createShapes(p));
   const geo = new THREE.ExtrudeGeometry(shapes, {
