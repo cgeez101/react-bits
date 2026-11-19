@@ -136,10 +136,10 @@ function Intro() {
     tl.to(q('.sA .li'), { yPercent: -110, duration: 0.45, stagger: 0.05, ease: 'power3.in' }, 2.95);
     tl.call(() => setTopo(true), null, 2.7); // mount the contour map only while it can be seen
     tl.to(q('.topo'), { opacity: 0.7, duration: 1.4, ease: 'none' }, 3.0);
+    tl.to(vuLevel, { v: 0, duration: 0.4 }, 2.95); // the meter makes way for the three-line statement
     tl.to(q('.sB .li'), { yPercent: 0, duration: 0.85, stagger: 0.12, ease: 'power4.out' }, 3.35);
     tl.to(q('.sB .li'), { yPercent: -110, duration: 0.45, stagger: 0.05, ease: 'power3.in' }, 4.9);
     tl.to(q('.tally, .freq'), { autoAlpha: 0, duration: 0.3 }, 4.9);
-    tl.to(vuLevel, { v: 0, duration: 0.4 }, 4.9);
 
     /* C · 5–9 s: the logo */
     tl.to(pose, { s: 1, ry: 0.35, rx: 0.08, duration: 1.7, ease: 'expo.out' }, 5.2);
@@ -194,9 +194,12 @@ function Intro() {
           <Lines lines={['Farmers work', 'sunrise to sunset.']} />
         </div>
       </div>
-      <div className="layer stmt sB" style={{ paddingTop: 136 }}>
+      <div className="layer stmt sB">
+        {/* spacers keep these lines exactly where scene A's lines sat */}
+        <span className="tally-ghost" />
+        <span className="freq-ghost" />
         <div>
-          <Lines lines={['Yet no station', <span key="s">is <span className="sig">made for them.</span></span>]} />
+          <Lines lines={['No station', 'is made', <span key="s" className="sig">for them.</span>]} />
         </div>
       </div>
       <div className="vu layer" style={{ inset: 'auto 160px 150px 160px' }} ref={vu}>

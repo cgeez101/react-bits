@@ -101,3 +101,7 @@ html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; backgro
 .end .url { font-family: var(--mono); font-size: 22px; letter-spacing: 0.14em; padding: 14px 22px; border: 1px solid var(--night-3); }
 
 .ln { overflow: hidden; }
+
+.tally-ghost { height: 56px; }
+.freq-ghost { height: 26px; }
+.freq { line-height: 26px; height: 26px; }
