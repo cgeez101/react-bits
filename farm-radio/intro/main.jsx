@@ -342,9 +342,9 @@ function Film() {
     /* ---------------- 13 · end card ---------------- */
     wipe('.s13', S.end, 'down');
     tl.set(q('.logo-stage'), { zIndex: 40 }, S.end);
-    tl.set(pose, { y: 1.05, x: 0, ry: -1.6, rx: 0.06, s: 0 }, S.end);
-    tl.to(pose, { s: 0.62, ry: 0.2, duration: 1.4, ease: 'expo.out' }, S.end + 0.1);
-    tl.to(pose, { ry: 1.6, duration: END - S.end - 1.5, ease: 'none' }, S.end + 1.5);
+    tl.set(pose, { y: 1.05, x: 0, ry: -2.2, rx: 0.06, s: 0 }, S.end);
+    tl.to(pose, { s: 0.62, ry: -0.75, duration: 1.4, ease: 'expo.out' }, S.end + 0.1);
+    tl.to(pose, { ry: -0.05, duration: END - S.end - 1.5, ease: 'sine.out' }, S.end + 1.5); // keeps turning the same way and settles facing camera
     tl.to(q('.s13 .li'), { yPercent: 0, duration: 0.9, stagger: 0.12, ease: 'power4.out' }, S.end + 0.6);
     tl.from(q('.s13 .line, .s13 .url'), { autoAlpha: 0, y: 12, duration: 0.6, stagger: 0.3 }, bar(37));
     tl.to(q('.fade'), { opacity: 1, duration: 1.0, ease: 'none' }, END - 1.0);

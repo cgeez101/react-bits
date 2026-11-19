@@ -53,6 +53,7 @@ const clock = () => {
     const t0 = Date.now();
     await page.evaluate(ms => window.__advance(ms), 1000 / FPS);
     await page.evaluate(() => new Promise(r => setTimeout(r, 0))); // let React commit any state change
+    if (f < +(process.env.START || 0)) continue; // re-render only the tail: time still advances, nothing is written
     await page.screenshot({ path: path.join(outDir, `f${String(f).padStart(4, '0')}.jpg`), type: 'jpeg', quality: 93 });
     if (f % 30 === 0 || process.env.FRAMES) console.log(`frame ${f}/${total} ${Date.now() - t0}ms`);
   }
